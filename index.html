@@ -1,814 +1,436 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabellone e Classifica Torneo</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        /* Custom scrollbar for horizontal tables on mobile */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torneo a Coppie</title>
+<style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fixed{position:fixed}.sticky{position:sticky}.inset-0{inset:0}.bottom-5{bottom:1.25rem}.right-5{right:1.25rem}.top-0{top:0}.z-20{z-index:20}.z-50{z-index:50}.col-span-1{grid-column:span 1/span 1}.col-span-5{grid-column:span 5/span 5}.mx-auto{margin-left:auto;margin-right:auto}.mb-6{margin-bottom:1.5rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.table{display:table}.grid{display:grid}.hidden{display:none}.h-1\.5{height:.375rem}.h-3\.5{height:.875rem}.h-6{height:1.5rem}.h-8{height:2rem}.max-h-\[90vh\]{max-height:90vh}.min-h-screen{min-height:100vh}.w-1\.5{width:.375rem}.w-10{width:2.5rem}.w-3\.5{width:.875rem}.w-6{width:1.5rem}.w-8{width:2rem}.w-full{width:100%}.min-w-0{min-width:0}.max-w-2xl{max-width:42rem}.max-w-7xl{max-width:80rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.translate-y-20{--tw-translate-y:5rem;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-11{grid-template-columns:repeat(11,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.divide-y>:not([hidden])~:not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px*(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px*var(--tw-divide-y-reverse))}.divide-slate-100>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgb(241 245 249/var(--tw-divide-opacity,1))}.self-start{align-self:flex-start}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.break-words{overflow-wrap:break-word}.rounded{border-radius:.25rem}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-md{border-radius:.375rem}.rounded-xl{border-radius:.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138/var(--tw-border-opacity,1))}.border-amber-400\/30{border-color:rgba(251,191,36,.3)}.border-blue-200{--tw-border-opacity:1;border-color:rgb(191 219 254/var(--tw-border-opacity,1))}.border-cyan-200{--tw-border-opacity:1;border-color:rgb(165 243 252/var(--tw-border-opacity,1))}.border-emerald-200{--tw-border-opacity:1;border-color:rgb(167 243 208/var(--tw-border-opacity,1))}.border-emerald-400{--tw-border-opacity:1;border-color:rgb(52 211 153/var(--tw-border-opacity,1))}.border-indigo-100{--tw-border-opacity:1;border-color:rgb(224 231 255/var(--tw-border-opacity,1))}.border-indigo-200{--tw-border-opacity:1;border-color:rgb(199 210 254/var(--tw-border-opacity,1))}.border-indigo-400{--tw-border-opacity:1;border-color:rgb(129 140 248/var(--tw-border-opacity,1))}.border-indigo-400\/30{border-color:rgba(129,140,248,.3)}.border-purple-200{--tw-border-opacity:1;border-color:rgb(233 213 255/var(--tw-border-opacity,1))}.border-rose-200{--tw-border-opacity:1;border-color:rgb(254 205 211/var(--tw-border-opacity,1))}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249/var(--tw-border-opacity,1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240/var(--tw-border-opacity,1))}.border-slate-300{--tw-border-opacity:1;border-color:rgb(203 213 225/var(--tw-border-opacity,1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85/var(--tw-border-opacity,1))}.border-teal-200{--tw-border-opacity:1;border-color:rgb(153 246 228/var(--tw-border-opacity,1))}.border-white\/20{border-color:hsla(0,0%,100%,.2)}.bg-amber-100{--tw-bg-opacity:1;background-color:rgb(254 243 199/var(--tw-bg-opacity,1))}.bg-amber-200{--tw-bg-opacity:1;background-color:rgb(253 230 138/var(--tw-bg-opacity,1))}.bg-amber-400{--tw-bg-opacity:1;background-color:rgb(251 191 36/var(--tw-bg-opacity,1))}.bg-amber-500\/30{background-color:rgba(245,158,11,.3)}.bg-blue-100{--tw-bg-opacity:1;background-color:rgb(219 234 254/var(--tw-bg-opacity,1))}.bg-cyan-100{--tw-bg-opacity:1;background-color:rgb(207 250 254/var(--tw-bg-opacity,1))}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229/var(--tw-bg-opacity,1))}.bg-emerald-200\/70{background-color:rgba(167,243,208,.7)}.bg-emerald-400{--tw-bg-opacity:1;background-color:rgb(52 211 153/var(--tw-bg-opacity,1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245/var(--tw-bg-opacity,1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129/var(--tw-bg-opacity,1))}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105/var(--tw-bg-opacity,1))}.bg-indigo-100{--tw-bg-opacity:1;background-color:rgb(224 231 255/var(--tw-bg-opacity,1))}.bg-indigo-50{--tw-bg-opacity:1;background-color:rgb(238 242 255/var(--tw-bg-opacity,1))}.bg-indigo-500\/30{background-color:rgba(99,102,241,.3)}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(79 70 229/var(--tw-bg-opacity,1))}.bg-orange-200{--tw-bg-opacity:1;background-color:rgb(254 215 170/var(--tw-bg-opacity,1))}.bg-purple-100{--tw-bg-opacity:1;background-color:rgb(243 232 255/var(--tw-bg-opacity,1))}.bg-rose-100{--tw-bg-opacity:1;background-color:rgb(255 228 230/var(--tw-bg-opacity,1))}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249/var(--tw-bg-opacity,1))}.bg-slate-200{--tw-bg-opacity:1;background-color:rgb(226 232 240/var(--tw-bg-opacity,1))}.bg-slate-200\/70{background-color:rgba(226,232,240,.7)}.bg-slate-200\/80{background-color:rgba(226,232,240,.8)}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252/var(--tw-bg-opacity,1))}.bg-slate-50\/50{background-color:rgba(248,250,252,.5)}.bg-slate-50\/60{background-color:rgba(248,250,252,.6)}.bg-slate-50\/70{background-color:rgba(248,250,252,.7)}.bg-slate-50\/80{background-color:rgba(248,250,252,.8)}.bg-slate-500{--tw-bg-opacity:1;background-color:rgb(100 116 139/var(--tw-bg-opacity,1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59/var(--tw-bg-opacity,1))}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42/var(--tw-bg-opacity,1))}.bg-slate-900\/60{background-color:rgba(15,23,42,.6)}.bg-teal-100{--tw-bg-opacity:1;background-color:rgb(204 251 241/var(--tw-bg-opacity,1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-white\/10{background-color:hsla(0,0%,100%,.1)}.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}.from-indigo-700{--tw-gradient-from:#4338ca var(--tw-gradient-from-position);--tw-gradient-to:rgba(67,56,202,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.via-blue-700{--tw-gradient-to:rgba(29,78,216,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),#1d4ed8 var(--tw-gradient-via-position),var(--tw-gradient-to)}.to-indigo-800{--tw-gradient-to:#3730a3 var(--tw-gradient-to-position)}.p-1{padding:.25rem}.p-2\.5{padding:.625rem}.p-3{padding:.75rem}.p-3\.5{padding:.875rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-1\.5{padding-left:.375rem;padding-right:.375rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-3\.5{padding-left:.875rem;padding-right:.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-3\.5{padding-top:.875rem;padding-bottom:.875rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pl-2{padding-left:.5rem}.pl-4{padding-left:1rem}.pr-2{padding-right:.5rem}.pr-4{padding-right:1rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-.025em}.text-amber-200{--tw-text-opacity:1;color:rgb(253 230 138/var(--tw-text-opacity,1))}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77/var(--tw-text-opacity,1))}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36/var(--tw-text-opacity,1))}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14/var(--tw-text-opacity,1))}.text-blue-100{--tw-text-opacity:1;color:rgb(219 234 254/var(--tw-text-opacity,1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175/var(--tw-text-opacity,1))}.text-cyan-800{--tw-text-opacity:1;color:rgb(21 94 117/var(--tw-text-opacity,1))}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105/var(--tw-text-opacity,1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87/var(--tw-text-opacity,1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70/var(--tw-text-opacity,1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(199 210 254/var(--tw-text-opacity,1))}.text-indigo-600{--tw-text-opacity:1;color:rgb(79 70 229/var(--tw-text-opacity,1))}.text-indigo-700{--tw-text-opacity:1;color:rgb(67 56 202/var(--tw-text-opacity,1))}.text-indigo-800{--tw-text-opacity:1;color:rgb(55 48 163/var(--tw-text-opacity,1))}.text-indigo-900{--tw-text-opacity:1;color:rgb(49 46 129/var(--tw-text-opacity,1))}.text-orange-800{--tw-text-opacity:1;color:rgb(154 52 18/var(--tw-text-opacity,1))}.text-purple-800{--tw-text-opacity:1;color:rgb(107 33 168/var(--tw-text-opacity,1))}.text-rose-400{--tw-text-opacity:1;color:rgb(251 113 133/var(--tw-text-opacity,1))}.text-rose-500{--tw-text-opacity:1;color:rgb(244 63 94/var(--tw-text-opacity,1))}.text-rose-600{--tw-text-opacity:1;color:rgb(225 29 72/var(--tw-text-opacity,1))}.text-rose-800{--tw-text-opacity:1;color:rgb(159 18 57/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105/var(--tw-text-opacity,1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85/var(--tw-text-opacity,1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59/var(--tw-text-opacity,1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42/var(--tw-text-opacity,1))}.text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23/var(--tw-text-opacity,1))}.text-teal-800{--tw-text-opacity:1;color:rgb(17 94 89/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.opacity-0{opacity:0}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color)}.shadow-2xl,.shadow-lg{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color)}.shadow-md{--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color)}.shadow-md,.shadow-sm{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgba(0,0,0,.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color),0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-1,.ring-2{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-amber-300\/50{--tw-ring-color:rgba(252,211,77,.5)}.ring-emerald-400{--tw-ring-opacity:1;--tw-ring-color:rgb(52 211 153/var(--tw-ring-opacity,1))}.ring-indigo-300{--tw-ring-opacity:1;--tw-ring-color:rgb(165 180 252/var(--tw-ring-opacity,1))}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-300{transition-duration:.3s}.hover\:border-indigo-300:hover{--tw-border-opacity:1;border-color:rgb(165 180 252/var(--tw-border-opacity,1))}.hover\:bg-amber-300:hover{--tw-bg-opacity:1;background-color:rgb(252 211 77/var(--tw-bg-opacity,1))}.hover\:bg-emerald-400:hover{--tw-bg-opacity:1;background-color:rgb(52 211 153/var(--tw-bg-opacity,1))}.hover\:bg-emerald-700:hover{--tw-bg-opacity:1;background-color:rgb(4 120 87/var(--tw-bg-opacity,1))}.hover\:bg-indigo-50\/40:hover{background-color:rgba(238,242,255,.4)}.hover\:bg-indigo-700:hover{--tw-bg-opacity:1;background-color:rgb(67 56 202/var(--tw-bg-opacity,1))}.hover\:bg-slate-200:hover{--tw-bg-opacity:1;background-color:rgb(226 232 240/var(--tw-bg-opacity,1))}.hover\:bg-slate-200\/70:hover{background-color:rgba(226,232,240,.7)}.hover\:bg-slate-300:hover{--tw-bg-opacity:1;background-color:rgb(203 213 225/var(--tw-bg-opacity,1))}.hover\:bg-slate-50:hover{--tw-bg-opacity:1;background-color:rgb(248 250 252/var(--tw-bg-opacity,1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(51 65 85/var(--tw-bg-opacity,1))}.hover\:bg-white\/20:hover{background-color:hsla(0,0%,100%,.2)}.hover\:text-indigo-800:hover{--tw-text-opacity:1;color:rgb(55 48 163/var(--tw-text-opacity,1))}.hover\:text-slate-900:hover{--tw-text-opacity:1;color:rgb(15 23 42/var(--tw-text-opacity,1))}.focus\:border-indigo-500:focus{--tw-border-opacity:1;border-color:rgb(99 102 241/var(--tw-border-opacity,1))}@media not all and (min-width:1024px){.max-lg\:hidden{display:none}}@media (min-width:640px){.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:p-4{padding:1rem}.sm\:p-5{padding:1.25rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:.875rem;line-height:1.25rem}}@media (min-width:768px){.md\:flex-row{flex-direction:row}}@media (min-width:1024px){.lg\:col-span-5{grid-column:span 5/span 5}.lg\:col-span-7{grid-column:span 7/span 7}.lg\:hidden{display:none}.lg\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.lg\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}.lg\:px-8{padding-left:2rem;padding-right:2rem}}</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Inter',system-ui,sans-serif}
+:focus-visible{outline:2px solid #4f46e5;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-800 text-white shadow-lg sticky top-0 z-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <div class="flex items-center gap-3">
-                <div class="bg-white/15 p-2 rounded-xl backdrop-blur-sm">
-                    <svg class="w-7 h-7 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                    </svg>
-                </div>
-                <div>
-                    <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">Torneo a Coppie</h1>
-                    <p class="text-xs sm:text-sm text-blue-100">16 Giocatori • 8 Coppie • 4 Campi • 8 Turni (~75 min)</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-2">
-                <button onclick="openSetupModal()" class="text-xs sm:text-sm bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-3.5 py-2 rounded-lg transition shadow-sm flex items-center gap-1.5 cursor-pointer">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    Coppie &amp; Sorteggio
-                </button>
-                <button onclick="resetToDefault()" class="text-xs sm:text-sm bg-white/10 hover:bg-white/20 text-white font-medium px-3 py-2 rounded-lg transition border border-white/20 flex items-center gap-1.5 cursor-pointer">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    Azzera
-                </button>
-            </div>
+<header class="bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-800 text-white shadow-lg sticky top-0 z-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+    <div>
+      <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">Torneo a Coppie</h1>
+      <p class="text-xs sm:text-sm text-blue-100">16 giocatori, 8 coppie, 4 campi, 8 turni (circa 72 minuti)</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button data-a="setup" class="text-xs sm:text-sm bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-3.5 py-2 rounded-lg transition">Coppie e sorteggio</button>
+      <button data-a="reset" class="text-xs sm:text-sm bg-white/10 hover:bg-white/20 font-medium px-3 py-2 rounded-lg border border-white/20 transition">Azzera risultati</button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
+
+  <!-- Timer -->
+  <div class="bg-slate-900 text-white rounded-2xl p-4 sm:p-5 mb-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-4">
+      <div id="t-dot" class="w-3.5 h-3.5 rounded-full bg-slate-500 shrink-0"></div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span id="t-badge" class="text-xs font-bold px-2.5 py-0.5 rounded-full border"></span>
+          <span id="t-round" class="text-xs text-slate-400 font-medium"></span>
         </div>
-    </header>
+        <div id="t-display" role="timer" class="text-3xl sm:text-4xl font-black font-mono mt-0.5">08:00</div>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm font-semibold">
+      <button data-a="prev" class="px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700" aria-label="Turno precedente">‹ Turno</button>
+      <button id="t-toggle" data-a="toggle" class="px-4 py-2.5 rounded-xl font-bold text-slate-950"></button>
+      <button data-a="next" class="px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700" aria-label="Turno successivo">Turno ›</button>
+      <button data-a="mode" data-v="match" class="px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700">8:00 Partita</button>
+      <button data-a="mode" data-v="break" class="px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-amber-300">1:00 Cambio</button>
+      <button data-a="restart" class="px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300" aria-label="Riavvia fase">↺</button>
+    </div>
+  </div>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
+  <!-- Tab mobile -->
+  <div class="flex lg:hidden bg-slate-200/80 p-1 rounded-xl mb-6" role="tablist">
+    <button id="tab-standings" data-a="tab" data-v="standings" role="tab" class="flex-1 py-2 text-sm font-semibold rounded-lg">Classifica</button>
+    <button id="tab-schedule" data-a="tab" data-v="schedule" role="tab" class="flex-1 py-2 text-sm font-semibold rounded-lg">Calendario</button>
+  </div>
 
-        <!-- Live Match Timer Bar -->
-        <div class="bg-slate-900 text-white rounded-2xl p-4 sm:p-5 mb-6 shadow-md border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-4">
-                <div id="timer-indicator" class="w-3.5 h-3.5 rounded-full bg-emerald-400 shrink-0"></div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span id="timer-phase-badge" class="text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-500/30 text-indigo-200 border border-indigo-400/30">
-                            Partita (8 min)
-                        </span>
-                        <span id="timer-round-label" class="text-xs text-slate-400 font-medium">4 Campi Attivi</span>
-                    </div>
-                    <div id="timer-display" class="text-3xl sm:text-4xl font-black tracking-tight font-mono mt-0.5 text-white">
-                        08:00
-                    </div>
-                </div>
-            </div>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-            <div class="flex flex-wrap items-center justify-center gap-2">
-                <button id="btn-timer-toggle" onclick="toggleTimer()" class="px-4 py-2.5 rounded-xl font-bold text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition flex items-center gap-1.5 shadow-sm cursor-pointer">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
-                    <span>Avvia Timer</span>
-                </button>
-                <button onclick="setTimerMode('match')" class="px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition cursor-pointer">
-                    8:00 Partita
-                </button>
-                <button onclick="setTimerMode('break')" class="px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 transition cursor-pointer">
-                    1:00 Cambio
-                </button>
-                <button onclick="resetTimer()" class="px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-slate-400 border border-slate-700 transition cursor-pointer" title="Reset Timer">
-                    ↺
-                </button>
-            </div>
+    <div id="sec-standings" class="lg:col-span-5 space-y-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="px-5 py-4 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+          <h2 class="font-bold text-lg">Classifica generale</h2>
+          <span class="text-xs font-medium text-slate-500 bg-slate-200/70 px-2.5 py-1 rounded-full">Vittoria = 2 punti</span>
         </div>
-        
-        <!-- Mobile Tab Switcher -->
-        <div class="flex lg:hidden bg-slate-200/80 p-1 rounded-xl mb-6">
-            <button id="tab-standings" onclick="switchTab('standings')" class="flex-1 py-2 text-sm font-semibold rounded-lg bg-white text-indigo-700 shadow-sm transition">
-                Classifica
-            </button>
-            <button id="tab-schedule" onclick="switchTab('schedule')" class="flex-1 py-2 text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition">
-                Calendario Giornate
-            </button>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <caption class="sr-only">Classifica delle coppie</caption>
+            <thead>
+              <tr class="text-xs font-semibold text-slate-500 border-b border-slate-200 bg-slate-50/80">
+                <th scope="col" class="py-3 pl-4 pr-2 w-10 text-center">#</th>
+                <th scope="col" class="py-3 px-2">Coppia</th>
+                <th scope="col" class="py-3 px-2 text-center" title="Partite giocate">G</th>
+                <th scope="col" class="py-3 px-2 text-center" title="Vittorie">V</th>
+                <th scope="col" class="py-3 px-2 text-center" title="Sconfitte">P</th>
+                <th scope="col" class="py-3 pl-2 pr-4 text-right">Pt</th>
+              </tr>
+            </thead>
+            <tbody id="standings" class="divide-y divide-slate-100 text-sm"></tbody>
+          </table>
         </div>
+        <p class="px-5 py-3 bg-slate-50 text-xs text-slate-500 border-t border-slate-100">
+          Parità: meno partite giocate, poi scontro diretto. Se resta pari, stessa posizione.
+        </p>
+      </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            
-            <!-- Left Column: Standings & Teams (5 cols on lg) -->
-            <div id="section-standings" class="lg:col-span-5 space-y-6">
-                
-                <!-- Standings Card -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
-                    <div class="px-5 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                            <h2 class="font-bold text-slate-800 text-lg">Classifica Generale</h2>
-                        </div>
-                        <span class="text-xs font-medium text-slate-500 bg-slate-200/70 px-2.5 py-1 rounded-full">Vittoria = 2 pt</span>
-                    </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200 bg-slate-50/80">
-                                    <th class="py-3 pl-4 pr-2 w-10 text-center">#</th>
-                                    <th class="py-3 px-2">Coppia</th>
-                                    <th class="py-3 px-2 text-center" title="Partite Giocate">G</th>
-                                    <th class="py-3 px-2 text-center" title="Vittorie">V</th>
-                                    <th class="py-3 px-2 text-center" title="Sconfitte">P</th>
-                                    <th class="py-3 pl-2 pr-4 text-right font-bold text-slate-700">PT</th>
-                                </tr>
-                            </thead>
-                            <tbody id="standings-body" class="divide-y divide-slate-100 text-sm">
-                                <!-- Populated via JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="px-5 py-3 bg-slate-50 text-xs text-slate-500 border-t border-slate-100 flex justify-between items-center">
-                        <span>Clicca sulle squadre nel calendario per aggiornare i vincitori.</span>
-                    </div>
-                </div>
-
-                <!-- Teams Roster Card -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
-                    <div class="px-5 py-3.5 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
-                        <h3 class="font-bold text-slate-800 text-base">Elenco Coppie (16 Giocatori)</h3>
-                        <button onclick="openSetupModal()" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 cursor-pointer">Modifica / Mischia</button>
-                    </div>
-                    <div id="teams-list" class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
-                        <!-- Populated via JS -->
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Right Column: Schedule & Rounds (7 cols on lg) -->
-            <div id="section-schedule" class="lg:col-span-7 space-y-5 hidden lg:block">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-4 flex flex-wrap items-center justify-between gap-3">
-                    <div>
-                        <h2 class="font-bold text-slate-800 text-base sm:text-lg">Calendario Partite (4 Campi)</h2>
-                        <p class="text-xs text-slate-500">Seleziona un turno o tocca la coppia vincente</p>
-                    </div>
-                    <div id="round-filters" class="flex flex-wrap gap-1.5">
-                        <!-- Populated via JS -->
-                    </div>
-                </div>
-
-                <div id="schedule-container" class="space-y-4">
-                    <!-- Populated via JS -->
-                </div>
-            </div>
-
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="px-5 py-3.5 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+          <h3 class="font-bold">Elenco coppie</h3>
+          <button data-a="setup" class="text-xs font-bold text-indigo-600 hover:text-indigo-800">Modifica o mischia</button>
         </div>
-    </main>
-
-    <!-- Setup & Shuffle Modal -->
-    <div id="setup-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-slate-200">
-            <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
-                <div>
-                    <h3 class="text-lg font-extrabold text-slate-800">Gestione Giocatori &amp; Sorteggio Coppie</h3>
-                    <p class="text-xs text-slate-500">Modifica i 16 nomi oppure mischia casualmente le 8 coppie</p>
-                </div>
-                <button onclick="closeSetupModal()" class="w-8 h-8 rounded-lg bg-slate-200/70 hover:bg-slate-300 text-slate-600 font-bold flex items-center justify-center cursor-pointer">✕</button>
-            </div>
-
-            <div class="p-6 overflow-y-auto space-y-5">
-                <div class="flex flex-wrap gap-2 justify-between items-center bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-100">
-                    <span class="text-xs sm:text-sm font-semibold text-indigo-900">Sorteggio automatico dei 16 giocatori:</span>
-                    <button onclick="shufflePlayersInModal()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold shadow-sm transition flex items-center gap-1.5 cursor-pointer">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                        Mischia tutte le coppie
-                    </button>
-                </div>
-
-                <div id="modal-pairs-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <!-- Populated via JS -->
-                </div>
-            </div>
-
-            <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex justify-end gap-2">
-                <button onclick="closeSetupModal()" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-200/70 transition cursor-pointer">
-                    Annulla
-                </button>
-                <button onclick="savePairsFromModal()" class="px-5 py-2 rounded-xl text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition cursor-pointer">
-                    Salva Coppie
-                </button>
-            </div>
-        </div>
+        <div id="teams" class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5"></div>
+      </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white text-sm font-medium px-4 py-2.5 rounded-xl shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
-        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-        <span id="toast-msg">Classifica aggiornata</span>
+    <div id="sec-schedule" class="lg:col-span-7 space-y-5 max-lg:hidden">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="font-bold text-lg">Calendario partite</h2>
+          <p class="text-xs text-slate-500">Tocca la coppia vincente; tocca di nuovo per annullare.</p>
+        </div>
+        <div id="filters" class="flex flex-wrap gap-1.5"></div>
+      </div>
+      <div id="schedule" class="space-y-4"></div>
     </div>
+  </div>
+</main>
 
-    <script>
-        // Configurazione base dei colori e ID delle 8 coppie
-        const TEAM_STYLES = {
-            A: 'bg-blue-100 text-blue-800 border-blue-200',
-            B: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-            C: 'bg-amber-100 text-amber-800 border-amber-200',
-            D: 'bg-purple-100 text-purple-800 border-purple-200',
-            E: 'bg-rose-100 text-rose-800 border-rose-200',
-            F: 'bg-cyan-100 text-cyan-800 border-cyan-200',
-            G: 'bg-indigo-100 text-indigo-800 border-indigo-200',
-            H: 'bg-teal-100 text-teal-800 border-teal-200'
-        };
+<!-- Modale coppie -->
+<div id="modal" class="fixed inset-0 bg-slate-900/60 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
+    <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+      <div>
+        <h3 id="m-title" class="text-lg font-extrabold">Giocatori e sorteggio coppie</h3>
+        <p class="text-xs text-slate-500">Modifica i nomi oppure mischia i 16 giocatori.</p>
+      </div>
+      <button data-a="close" class="w-8 h-8 rounded-lg bg-slate-200/70 hover:bg-slate-300 font-bold" aria-label="Chiudi">✕</button>
+    </div>
+    <div class="p-6 overflow-y-auto space-y-4">
+      <div class="flex flex-wrap gap-2 justify-between items-center bg-indigo-50 p-3.5 rounded-xl border border-indigo-100">
+        <span class="text-sm font-semibold text-indigo-900">Sorteggio casuale dei 16 giocatori</span>
+        <button data-a="shuffle" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold">Mischia tutte le coppie</button>
+      </div>
+      <div id="m-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+      <p id="m-err" class="text-sm font-semibold text-rose-600" role="alert"></p>
+    </div>
+    <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex justify-end gap-2">
+      <button data-a="close" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-200/70">Annulla</button>
+      <button data-a="save" class="px-5 py-2 rounded-xl text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white">Salva coppie</button>
+    </div>
+  </div>
+</div>
 
-        const DEFAULT_PAIRS = {
-            A: ['Crippa', 'Corna'],
-            B: ['Anselmi', 'Milesi'],
-            C: ['Centanaro', 'Bonaldi'],
-            D: ['Ravasio', 'Meryem'],
-            E: ['Barcella', 'Valsecchi'],
-            F: ['Carminati', 'Giuliani'],
-            G: ['Locatelli', 'Ghislandi'],
-            H: ['Plebani', 'Masoni']
-        };
+<div id="toast" role="status" aria-live="polite" class="fixed bottom-5 right-5 bg-slate-900 text-white text-sm font-medium px-4 py-2.5 rounded-xl shadow-xl translate-y-20 opacity-0 transition-all duration-300 z-50"></div>
 
-        let pairsConfig = JSON.parse(JSON.stringify(DEFAULT_PAIRS));
-        let TEAMS = {};
+<script>
+const IDS = ['A','B','C','D','E','F','G','H'];
+const STYLES = {
+  A:'bg-blue-100 text-blue-800 border-blue-200', B:'bg-emerald-100 text-emerald-800 border-emerald-200',
+  C:'bg-amber-100 text-amber-800 border-amber-200', D:'bg-purple-100 text-purple-800 border-purple-200',
+  E:'bg-rose-100 text-rose-800 border-rose-200', F:'bg-cyan-100 text-cyan-800 border-cyan-200',
+  G:'bg-indigo-100 text-indigo-800 border-indigo-200', H:'bg-teal-100 text-teal-800 border-teal-200'
+};
+const DEFAULT_PAIRS = {
+  A:['Crippa','Corna'], B:['Anselmi','Milesi'], C:['Centanaro','Bonaldi'], D:['Ravasio','Meryem'],
+  E:['Barcella','Valsecchi'], F:['Carminati','Giuliani'], G:['Locatelli','Ghislandi'], H:['Plebani','Masoni']
+};
+const MATCH_SEC = 480, BREAK_SEC = 60, ROUNDS = 8, KEY = 'torneo_coppie_v2';
+const $ = id => document.getElementById(id);
+const clone = o => JSON.parse(JSON.stringify(o));
+const pad = n => String(n).padStart(2, '0');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-        function rebuildTeamsFromPairs() {
-            TEAMS = {};
-            Object.keys(TEAM_STYLES).forEach(id => {
-                const p1 = (pairsConfig[id]?.[0] || `Giocatore ${id}1`).trim();
-                const p2 = (pairsConfig[id]?.[1] || `Giocatore ${id}2`).trim();
-                TEAMS[id] = {
-                    id,
-                    p1,
-                    p2,
-                    name: `${p1} / ${p2}`,
-                    fullName: `${p1} e ${p2}`,
-                    color: TEAM_STYLES[id]
-                };
-            });
-        }
-        rebuildTeamsFromPairs();
+// Calendario generato con il metodo del cerchio: turni 1-7 = girone all’italiana completo,
+// turno 8 = rivincita del turno 1.
+function buildFixtures() {
+  let list = [...IDS], rounds = [];
+  for (let r = 0; r < 7; r++) {
+    rounds.push([0,1,2,3].map(i => [list[i], list[7 - i]]));
+    list = [list[0], list[7], ...list.slice(1, 7)];
+  }
+  rounds.push(rounds[0]);
+  return rounds;
+}
+const FIXTURES = buildFixtures().map((ms, r) => ({
+  round: r + 1,
+  time: `Min ${pad(r * 9)} - ${pad(r * 9 + 9)}`,
+  matches: ms.map(([t1, t2], i) => ({ id: `r${r+1}m${i+1}`, court: i + 1, t1, t2 }))
+}));
+const MATCHES = FIXTURES.flatMap(r => r.matches);
+const BY_ID = Object.fromEntries(MATCHES.map(m => [m.id, m]));
 
-        // Calendario 8 Turni su 4 Campi (75 minuti totali: 8 turni da 8 min + 1 min cambio campo = 72 min)
-        // Turni 1-7: Girone all'italiana perfetto (ogni coppia sfida tutte le altre 7 esattamente 1 volta)
-        // Turno 8: Turno finale / rivincita
-        const INITIAL_SCHEDULE = [
-            {
-                round: 1,
-                time: 'Min 00 - 09',
-                matches: [
-                    { id: 'r1m1', court: 1, team1: 'A', team2: 'H', winner: null },
-                    { id: 'r1m2', court: 2, team1: 'B', team2: 'G', winner: null },
-                    { id: 'r1m3', court: 3, team1: 'C', team2: 'F', winner: null },
-                    { id: 'r1m4', court: 4, team1: 'D', team2: 'E', winner: null }
-                ]
-            },
-            {
-                round: 2,
-                time: 'Min 09 - 18',
-                matches: [
-                    { id: 'r2m1', court: 1, team1: 'A', team2: 'G', winner: null },
-                    { id: 'r2m2', court: 2, team1: 'H', team2: 'F', winner: null },
-                    { id: 'r2m3', court: 3, team1: 'B', team2: 'E', winner: null },
-                    { id: 'r2m4', court: 4, team1: 'C', team2: 'D', winner: null }
-                ]
-            },
-            {
-                round: 3,
-                time: 'Min 18 - 27',
-                matches: [
-                    { id: 'r3m1', court: 1, team1: 'A', team2: 'F', winner: null },
-                    { id: 'r3m2', court: 2, team1: 'G', team2: 'E', winner: null },
-                    { id: 'r3m3', court: 3, team1: 'H', team2: 'D', winner: null },
-                    { id: 'r3m4', court: 4, team1: 'B', team2: 'C', winner: null }
-                ]
-            },
-            {
-                round: 4,
-                time: 'Min 27 - 36',
-                matches: [
-                    { id: 'r4m1', court: 1, team1: 'A', team2: 'E', winner: null },
-                    { id: 'r4m2', court: 2, team1: 'F', team2: 'D', winner: null },
-                    { id: 'r4m3', court: 3, team1: 'G', team2: 'C', winner: null },
-                    { id: 'r4m4', court: 4, team1: 'H', team2: 'B', winner: null }
-                ]
-            },
-            {
-                round: 5,
-                time: 'Min 36 - 45',
-                matches: [
-                    { id: 'r5m1', court: 1, team1: 'A', team2: 'D', winner: null },
-                    { id: 'r5m2', court: 2, team1: 'E', team2: 'C', winner: null },
-                    { id: 'r5m3', court: 3, team1: 'F', team2: 'B', winner: null },
-                    { id: 'r5m4', court: 4, team1: 'G', team2: 'H', winner: null }
-                ]
-            },
-            {
-                round: 6,
-                time: 'Min 45 - 54',
-                matches: [
-                    { id: 'r6m1', court: 1, team1: 'A', team2: 'C', winner: null },
-                    { id: 'r6m2', court: 2, team1: 'D', team2: 'B', winner: null },
-                    { id: 'r6m3', court: 3, team1: 'E', team2: 'H', winner: null },
-                    { id: 'r6m4', court: 4, team1: 'F', team2: 'G', winner: null }
-                ]
-            },
-            {
-                round: 7,
-                time: 'Min 54 - 63',
-                matches: [
-                    { id: 'r7m1', court: 1, team1: 'A', team2: 'B', winner: null },
-                    { id: 'r7m2', court: 2, team1: 'C', team2: 'H', winner: null },
-                    { id: 'r7m3', court: 3, team1: 'D', team2: 'G', winner: null },
-                    { id: 'r7m4', court: 4, team1: 'E', team2: 'F', winner: null }
-                ]
-            },
-            {
-                round: 8,
-                time: 'Min 63 - 72',
-                matches: [
-                    { id: 'r8m1', court: 1, team1: 'A', team2: 'H', winner: null },
-                    { id: 'r8m2', court: 2, team1: 'B', team2: 'G', winner: null },
-                    { id: 'r8m3', court: 3, team1: 'C', team2: 'F', winner: null },
-                    { id: 'r8m4', court: 4, team1: 'D', team2: 'E', winner: null }
-                ]
-            }
-        ];
+// Stato: coppie e vincitori (matchId -> id coppia)
+let state = { pairs: clone(DEFAULT_PAIRS), winners: {} };
+let filter = 'ALL', tmp = {};
+const tm = { mode: 'match', round: 1, left: MATCH_SEC, endAt: 0, running: false };
+const dur = m => m === 'match' ? MATCH_SEC : BREAK_SEC;
 
-        // Stato dell'applicazione
-        let schedule = JSON.parse(JSON.stringify(INITIAL_SCHEDULE));
-        let selectedRoundFilter = 'ALL';
+function load() {
+  try {
+    let s = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (!s) { // migrazione dalla versione precedente
+      const sc = JSON.parse(localStorage.getItem('torneo_coppie_4campi_v1') || 'null');
+      const pr = JSON.parse(localStorage.getItem('torneo_coppie_nomi_v1') || 'null');
+      if (sc || pr) s = { pairs: pr || {}, winners: Object.fromEntries((sc || []).flatMap(r => r.matches).filter(m => m.winner).map(m => [m.id, m.winner])) };
+    }
+    if (!s) return;
+    IDS.forEach(id => { const p = s.pairs?.[id]; if (Array.isArray(p) && p.length === 2) state.pairs[id] = p.map(String); });
+    Object.entries(s.winners || {}).forEach(([k, v]) => { const m = BY_ID[k]; if (m && (v === m.t1 || v === m.t2)) state.winners[k] = v; });
+  } catch (e) { console.warn('Stato non leggibile:', e); }
+}
+function persist() {
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { console.warn('Salvataggio non riuscito:', e); }
+}
 
-        // Caricamento stato
-        function loadState() {
-            try {
-                const savedSchedule = localStorage.getItem('torneo_coppie_4campi_v1');
-                if (savedSchedule) {
-                    schedule = JSON.parse(savedSchedule);
-                }
-                const savedPairs = localStorage.getItem('torneo_coppie_nomi_v1');
-                if (savedPairs) {
-                    pairsConfig = JSON.parse(savedPairs);
-                    rebuildTeamsFromPairs();
-                }
-            } catch (e) {
-                console.warn('Impossibile leggere stato:', e);
-            }
-        }
+function team(id) {
+  const [a, b] = state.pairs[id].map((x, i) => x.trim() || `Giocatore ${id}${i + 1}`);
+  return { id, name: `${a} / ${b}`, full: `${a} e ${b}`, color: STYLES[id] };
+}
 
-        function saveState() {
-            try {
-                localStorage.setItem('torneo_coppie_4campi_v1', JSON.stringify(schedule));
-                localStorage.setItem('torneo_coppie_nomi_v1', JSON.stringify(pairsConfig));
-            } catch (e) {
-                console.warn('Impossibile salvare stato:', e);
-            }
-        }
+// ---------- Classifica ----------
+function standings() {
+  const s = Object.fromEntries(IDS.map(id => [id, { id, p: 0, w: 0, l: 0, pts: 0 }]));
+  const h2h = {};
+  MATCHES.forEach(m => {
+    const w = state.winners[m.id]; if (!w) return;
+    const l = w === m.t1 ? m.t2 : m.t1;
+    s[w].p++; s[w].w++; s[w].pts += 2; s[l].p++; s[l].l++;
+    h2h[w + l] = (h2h[w + l] || 0) + 1;
+  });
+  const head = (a, b) => (h2h[a.id + b.id] || 0) - (h2h[b.id + a.id] || 0);
+  const cmp = (a, b) => b.pts - a.pts || a.p - b.p || -head(a, b);
+  const rows = Object.values(s).sort((a, b) => cmp(a, b) || a.id.localeCompare(b.id));
+  const rank = [];
+  rows.forEach((r, i) => { rank[i] = i > 0 && cmp(rows[i - 1], r) === 0 ? rank[i - 1] : i + 1; });
+  return { rows, rank, played: rows.some(r => r.p > 0) };
+}
 
-        // --- GESTIONE MODALE COPPIE & SORTEGGIO ---
-        let tempPairs = {};
+function renderStandings() {
+  const { rows, rank, played } = standings();
+  $('standings').innerHTML = rows.map((r, i) => {
+    const t = team(r.id), k = rank[i];
+    const medal = !played ? 'text-slate-600 bg-slate-100'
+      : k === 1 ? 'text-amber-800 bg-amber-200 ring-2 ring-amber-300/50'
+      : k === 2 ? 'text-slate-700 bg-slate-200' : k === 3 ? 'text-orange-800 bg-orange-200' : 'text-slate-600 bg-slate-100';
+    return `<tr class="hover:bg-slate-50">
+      <td class="py-3 pl-4 pr-2 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${medal}">${played ? k : '–'}</span></td>
+      <td class="py-3 px-2"><div class="flex items-center gap-2">
+        <span class="px-1.5 text-[11px] font-bold rounded border ${t.color}">${t.id}</span>
+        <span class="font-semibold text-xs sm:text-sm leading-tight">${esc(t.name)}</span></div></td>
+      <td class="py-3 px-2 text-center text-slate-600">${r.p}</td>
+      <td class="py-3 px-2 text-center text-emerald-600 font-semibold">${r.w}</td>
+      <td class="py-3 px-2 text-center text-rose-500">${r.l}</td>
+      <td class="py-3 pl-2 pr-4 text-right font-extrabold text-indigo-700 text-base">${r.pts}</td></tr>`;
+  }).join('');
+}
 
-        function openSetupModal() {
-            tempPairs = JSON.parse(JSON.stringify(pairsConfig));
-            renderModalPairs();
-            document.getElementById('setup-modal').classList.remove('hidden');
-        }
+function renderTeams() {
+  $('teams').innerHTML = IDS.map(id => {
+    const t = team(id);
+    return `<div class="flex items-center gap-3 p-2.5 rounded-xl border border-slate-100 bg-slate-50/60">
+      <span class="w-8 h-8 rounded-lg flex items-center justify-center font-extrabold text-sm border shrink-0 ${t.color}">${id}</span>
+      <div class="min-w-0"><p class="text-xs font-semibold text-slate-400">Coppia ${id}</p>
+      <p class="text-sm font-bold break-words">${esc(t.full)}</p></div></div>`;
+  }).join('');
+}
 
-        function closeSetupModal() {
-            document.getElementById('setup-modal').classList.add('hidden');
-        }
+// ---------- Calendario ----------
+const badge = (c, t) => `<span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-${c}-100 text-${c}-800">${t}</span>`;
 
-        function renderModalPairs() {
-            const grid = document.getElementById('modal-pairs-grid');
-            grid.innerHTML = '';
-            Object.keys(TEAM_STYLES).forEach(id => {
-                const div = document.createElement('div');
-                div.className = 'p-3 rounded-xl border border-slate-200 bg-slate-50/70 space-y-2';
-                div.innerHTML = `
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 text-xs font-extrabold rounded border ${TEAM_STYLES[id]}">Coppia ${id}</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <input type="text" value="${tempPairs[id][0]}" oninput="tempPairs['${id}'][0] = this.value"
-                            class="w-full px-2.5 py-1.5 text-sm font-medium bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-indigo-500" placeholder="Giocatore 1">
-                        <input type="text" value="${tempPairs[id][1]}" oninput="tempPairs['${id}'][1] = this.value"
-                            class="w-full px-2.5 py-1.5 text-sm font-medium bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-indigo-500" placeholder="Giocatore 2">
-                    </div>
-                `;
-                grid.appendChild(div);
-            });
-        }
+function side(m, id) {
+  const t = team(id), won = state.winners[m.id] === id;
+  return `<button data-a="win" data-m="${m.id}" data-t="${id}" aria-pressed="${won}"
+    class="col-span-5 text-left p-2.5 rounded-xl border transition flex items-center justify-between gap-2 ${won ? 'bg-emerald-50 border-emerald-400 ring-1 ring-emerald-400' : 'bg-white border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/40'}">
+    <span class="min-w-0 flex items-center gap-1.5">
+      <span class="text-[11px] font-bold px-1.5 rounded border shrink-0 ${t.color}">${id}</span>
+      <span class="text-xs sm:text-sm font-bold leading-tight break-words">${esc(t.name)}</span></span>
+    ${won ? '<span class="text-emerald-700 font-extrabold text-xs shrink-0 bg-emerald-200/70 px-1.5 py-0.5 rounded">VINCE</span>' : ''}</button>`;
+}
 
-        function shufflePlayersInModal() {
-            const allPlayers = [];
-            Object.keys(TEAM_STYLES).forEach(id => {
-                allPlayers.push(tempPairs[id][0].trim() || `Giocatore ${id}1`);
-                allPlayers.push(tempPairs[id][1].trim() || `Giocatore ${id}2`);
-            });
-            // Fisher-Yates shuffle
-            for (let i = allPlayers.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [allPlayers[i], allPlayers[j]] = [allPlayers[j], allPlayers[i]];
-            }
-            const ids = Object.keys(TEAM_STYLES);
-            ids.forEach((id, idx) => {
-                tempPairs[id] = [allPlayers[idx * 2], allPlayers[idx * 2 + 1]];
-            });
-            renderModalPairs();
-            showToast('Coppie rimescolate! Premi "Salva Coppie" per applicare');
-        }
+function roundCard(r) {
+  const done = r.matches.every(m => state.winners[m.id]), cur = r.round === tm.round;
+  const border = cur ? 'border-indigo-400 ring-1 ring-indigo-300' : done ? 'border-emerald-200' : 'border-slate-200';
+  return `<section class="bg-white rounded-2xl shadow-sm border overflow-hidden ${border}">
+    <div class="px-5 py-3.5 bg-slate-50/80 border-b border-slate-100 flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center gap-2.5"><h3 class="font-extrabold text-base sm:text-lg">Turno ${r.round}</h3>
+        ${done ? badge('emerald', 'Giocato') : cur ? badge('indigo', 'Turno attuale') : badge('amber', 'In programma')}</div>
+      <span class="text-xs bg-white px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 font-semibold">${r.time} (8 min di gioco)</span>
+    </div>
+    <div class="divide-y divide-slate-100">${r.matches.map(m => `
+      <div class="p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+        <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md shrink-0 self-start">Campo ${m.court}</span>
+        <div class="flex-1 grid grid-cols-11 items-center gap-2">${side(m, m.t1)}
+          <span class="col-span-1 text-center text-xs font-extrabold text-slate-400">VS</span>${side(m, m.t2)}</div>
+      </div>`).join('')}</div></section>`;
+}
 
-        function savePairsFromModal() {
-            pairsConfig = JSON.parse(JSON.stringify(tempPairs));
-            rebuildTeamsFromPairs();
-            saveState();
-            renderAll();
-            closeSetupModal();
-            showToast('Nuove coppie salvate nel tabellone');
-        }
+function renderSchedule() {
+  $('schedule').innerHTML = FIXTURES.filter(r => filter === 'ALL' || r.round === filter).map(roundCard).join('');
+}
 
-        // --- GESTIONE TIMER PARTITE ---
-        let timerMode = 'match'; // 'match' (480s) o 'break' (60s)
-        let timerSecondsLeft = 480;
-        let timerRunning = false;
-        let timerInterval = null;
+function renderFilters() {
+  const b = (v, label) => `<button data-a="filter" data-v="${v}" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1 ${filter === (v === 'ALL' ? 'ALL' : +v) ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">${label}</button>`;
+  $('filters').innerHTML = b('ALL', 'Tutti') + FIXTURES.map(r =>
+    b(r.round, `T${r.round}${r.matches.every(m => state.winners[m.id]) ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>' : ''}`)).join('');
+}
 
-        function playBeep() {
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(880, ctx.currentTime);
-                gain.gain.setValueAtTime(0.25, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.7);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start();
-                osc.stop(ctx.currentTime + 0.7);
-            } catch (e) {}
-        }
+function renderAll() { renderStandings(); renderTeams(); renderFilters(); renderSchedule(); }
 
-        function updateTimerUI() {
-            const mins = String(Math.floor(timerSecondsLeft / 60)).padStart(2, '0');
-            const secs = String(timerSecondsLeft % 60).padStart(2, '0');
-            const display = document.getElementById('timer-display');
-            const badge = document.getElementById('timer-phase-badge');
-            const toggleBtn = document.getElementById('btn-timer-toggle');
-            const indicator = document.getElementById('timer-indicator');
+// ---------- Timer (basato sull’orario, non perde colpi se la scheda va in background) ----------
+let ac, wl;
+function unlockAudio() { try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); ac.resume(); } catch (e) {} }
+function beep() {
+  try {
+    unlockAudio();
+    [0, 0.25].forEach(d => {
+      const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime + d;
+      o.frequency.value = 880; g.gain.setValueAtTime(0.25, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+      o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + 0.2);
+    });
+  } catch (e) {}
+}
+async function wake(on) {
+  try {
+    if (on && 'wakeLock' in navigator) wl = await navigator.wakeLock.request('screen');
+    else if (wl) { await wl.release(); wl = null; }
+  } catch (e) {}
+}
 
-            display.textContent = `${mins}:${secs}`;
-            if (timerSecondsLeft <= 30 && timerSecondsLeft > 0) {
-                display.classList.add('text-amber-400');
-                display.classList.remove('text-white', 'text-rose-400');
-            } else if (timerSecondsLeft === 0) {
-                display.classList.add('text-rose-400');
-                display.classList.remove('text-white', 'text-amber-400');
-            } else {
-                display.classList.add('text-white');
-                display.classList.remove('text-amber-400', 'text-rose-400');
-            }
+function paintTimer() {
+  const d = $('t-display'), match = tm.mode === 'match';
+  d.textContent = `${pad(tm.left / 60 | 0)}:${pad(tm.left % 60)}`;
+  d.className = 'text-3xl sm:text-4xl font-black font-mono mt-0.5 ' + (tm.left === 0 ? 'text-rose-400' : tm.left <= 30 ? 'text-amber-400' : 'text-white');
+  $('t-badge').textContent = match ? 'Partita (8 min)' : 'Cambio campo (1 min)';
+  $('t-badge').className = 'text-xs font-bold px-2.5 py-0.5 rounded-full border ' + (match ? 'bg-indigo-500/30 text-indigo-200 border-indigo-400/30' : 'bg-amber-500/30 text-amber-200 border-amber-400/30');
+  $('t-round').textContent = `Turno ${tm.round} di ${ROUNDS}, 4 campi`;
+  $('t-toggle').textContent = tm.running ? '⏸ Pausa' : (tm.left > 0 && tm.left < dur(tm.mode)) ? '▶ Riprendi' : '▶ Avvia';
+  $('t-toggle').className = 'px-4 py-2.5 rounded-xl font-bold text-slate-950 ' + (tm.running ? 'bg-amber-400 hover:bg-amber-300' : 'bg-emerald-500 hover:bg-emerald-400');
+  $('t-dot').className = 'w-3.5 h-3.5 rounded-full shrink-0 ' + (tm.running ? 'bg-emerald-400 animate-pulse' : 'bg-slate-500');
+}
 
-            if (timerMode === 'match') {
-                badge.textContent = 'Partita (8 min)';
-                badge.className = 'text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-500/30 text-indigo-200 border border-indigo-400/30';
-            } else {
-                badge.textContent = 'Cambio Campo (1 min)';
-                badge.className = 'text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/30 text-amber-200 border border-amber-400/30';
-            }
+function phaseEnd() {
+  beep(); navigator.vibrate?.([200, 100, 200]);
+  if (tm.mode === 'match') {
+    if (tm.round === ROUNDS) { tm.running = false; wake(false); toast('Torneo concluso!'); return; }
+    tm.mode = 'break'; toast('Tempo scaduto: cambio campo');
+  } else {
+    tm.mode = 'match'; tm.round++; renderSchedule(); toast(`Inizia il turno ${tm.round}`);
+  }
+  tm.left = dur(tm.mode); tm.endAt = Date.now() + tm.left * 1000; // passa in automatico alla fase successiva
+}
 
-            if (timerRunning) {
-                toggleBtn.innerHTML = `<span>⏸ Pausa</span>`;
-                toggleBtn.className = 'px-4 py-2.5 rounded-xl font-bold text-sm bg-amber-400 hover:bg-amber-300 text-slate-950 transition flex items-center gap-1.5 shadow-sm cursor-pointer';
-                indicator.className = 'w-3.5 h-3.5 rounded-full bg-emerald-400 animate-ping shrink-0';
-            } else {
-                toggleBtn.innerHTML = `<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg><span>Avvia Timer</span>`;
-                toggleBtn.className = 'px-4 py-2.5 rounded-xl font-bold text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition flex items-center gap-1.5 shadow-sm cursor-pointer';
-                indicator.className = 'w-3.5 h-3.5 rounded-full bg-slate-500 shrink-0';
-            }
-        }
+function tick() {
+  if (!tm.running) return;
+  tm.left = Math.max(0, Math.ceil((tm.endAt - Date.now()) / 1000));
+  if (tm.left === 0) phaseEnd();
+  paintTimer();
+}
 
-        function toggleTimer() {
-            if (timerRunning) {
-                clearInterval(timerInterval);
-                timerRunning = false;
-            } else {
-                if (timerSecondsLeft === 0) {
-                    timerSecondsLeft = timerMode === 'match' ? 480 : 60;
-                }
-                timerRunning = true;
-                timerInterval = setInterval(() => {
-                    if (timerSecondsLeft > 0) {
-                        timerSecondsLeft--;
-                        updateTimerUI();
-                        if (timerSecondsLeft === 0) {
-                            playBeep();
-                            showToast(timerMode === 'match' ? 'Tempo partita scaduto! Cambio campo' : 'Fine cambio campo! Inizia il turno');
-                        }
-                    } else {
-                        clearInterval(timerInterval);
-                        timerRunning = false;
-                        updateTimerUI();
-                    }
-                }, 1000);
-            }
-            updateTimerUI();
-        }
+function toggleTimer() {
+  if (tm.running) { tick(); tm.running = false; wake(false); }
+  else {
+    unlockAudio();
+    if (tm.left === 0) tm.left = dur(tm.mode);
+    tm.endAt = Date.now() + tm.left * 1000; tm.running = true; wake(true);
+  }
+  paintTimer();
+}
+function setMode(m) { tm.running = false; wake(false); tm.mode = m; tm.left = dur(m); paintTimer(); }
+function stepRound(d) {
+  tm.round = Math.min(ROUNDS, Math.max(1, tm.round + d));
+  setMode('match'); renderSchedule();
+}
 
-        function setTimerMode(mode) {
-            clearInterval(timerInterval);
-            timerRunning = false;
-            timerMode = mode;
-            timerSecondsLeft = mode === 'match' ? 480 : 60;
-            updateTimerUI();
-        }
+// ---------- Modale coppie ----------
+function renderModal() {
+  $('m-grid').innerHTML = IDS.map(id => `
+    <div class="p-3 rounded-xl border border-slate-200 bg-slate-50/70 space-y-2">
+      <span class="inline-block px-2 py-0.5 text-xs font-extrabold rounded border ${STYLES[id]}">Coppia ${id}</span>
+      <div class="grid grid-cols-2 gap-2">${[0, 1].map(i => `
+        <input type="text" data-id="${id}" data-i="${i}" value="${esc(tmp[id][i])}" maxlength="30" placeholder="Giocatore ${i + 1}" aria-label="Coppia ${id}, giocatore ${i + 1}"
+          class="w-full px-2.5 py-1.5 text-sm font-medium bg-white border border-slate-300 rounded-lg focus:border-indigo-500">`).join('')}
+      </div></div>`).join('');
+}
+function openSetup() {
+  tmp = clone(state.pairs); renderModal(); $('m-err').textContent = '';
+  $('modal').classList.replace('hidden', 'flex'); $('m-grid').querySelector('input').focus();
+}
+function closeSetup() { $('modal').classList.replace('flex', 'hidden'); }
 
-        function resetTimer() {
-            setTimerMode(timerMode);
-        }
+function shuffleModal() {
+  const all = IDS.flatMap(id => tmp[id].map((n, i) => n.trim() || `Giocatore ${id}${i + 1}`));
+  for (let i = all.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [all[i], all[j]] = [all[j], all[i]]; }
+  IDS.forEach((id, i) => { tmp[id] = [all[i * 2], all[i * 2 + 1]]; });
+  renderModal(); toast('Coppie mischiate: premi “Salva coppie” per applicarle');
+}
 
-        // Ripristina stato iniziale
-        function resetToDefault() {
-            schedule = JSON.parse(JSON.stringify(INITIAL_SCHEDULE));
-            saveState();
-            renderAll();
-            showToast('Tabellone e punteggi azzerati');
-        }
+function savePairs() {
+  const names = IDS.flatMap(id => tmp[id].map(n => n.trim().toLowerCase()).filter(Boolean));
+  const dup = names.find((n, i) => names.indexOf(n) !== i);
+  if (dup) { $('m-err').textContent = `Il nome “${dup}” compare più volte.`; return; }
+  const changed = JSON.stringify(tmp) !== JSON.stringify(state.pairs);
+  if (changed && Object.keys(state.winners).length &&
+      !confirm('Ci sono già risultati registrati: resteranno associati alle lettere delle coppie (A-H), non ai giocatori. Continuare?')) return;
+  state.pairs = clone(tmp); persist(); renderAll(); closeSetup(); toast('Coppie salvate');
+}
 
-        // Imposta o rimuove il vincitore di una partita
-        function toggleWinner(roundNum, matchId, teamId) {
-            const roundObj = schedule.find(r => r.round === roundNum);
-            if (!roundObj) return;
-            const matchObj = roundObj.matches.find(m => m.id === matchId);
-            if (!matchObj) return;
+// ---------- UI ----------
+let toastT;
+function toast(msg) {
+  const t = $('toast'); t.textContent = msg; t.classList.remove('translate-y-20', 'opacity-0');
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.add('translate-y-20', 'opacity-0'), 2200);
+}
+const TAB_ON = 'flex-1 py-2 text-sm font-semibold rounded-lg bg-white text-indigo-700 shadow-sm';
+const TAB_OFF = 'flex-1 py-2 text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900';
+function showTab(v) {
+  $('sec-standings').classList.toggle('max-lg:hidden', v !== 'standings');
+  $('sec-schedule').classList.toggle('max-lg:hidden', v !== 'schedule');
+  ['standings', 'schedule'].forEach(k => {
+    $('tab-' + k).className = k === v ? TAB_ON : TAB_OFF;
+    $('tab-' + k).setAttribute('aria-selected', k === v);
+  });
+}
 
-            if (matchObj.winner === teamId) {
-                matchObj.winner = null; // Deseleziona se già selezionato
-            } else {
-                matchObj.winner = teamId;
-            }
+const ACTIONS = {
+  setup: openSetup, close: closeSetup, save: savePairs, shuffle: shuffleModal,
+  reset() {
+    if (!confirm('Azzerare tutti i risultati? Le coppie restano invariate.')) return;
+    state.winners = {}; persist(); renderAll(); toast('Risultati azzerati');
+  },
+  toggle: toggleTimer, restart: () => setMode(tm.mode), prev: () => stepRound(-1), next: () => stepRound(1),
+  mode: b => setMode(b.dataset.v),
+  tab: b => showTab(b.dataset.v),
+  filter(b) { filter = b.dataset.v === 'ALL' ? 'ALL' : +b.dataset.v; renderFilters(); renderSchedule(); },
+  win(b) {
+    const { m, t } = b.dataset;
+    if (state.winners[m] === t) delete state.winners[m]; else state.winners[m] = t;
+    persist(); renderStandings(); renderFilters(); renderSchedule(); toast('Classifica aggiornata');
+  }
+};
 
-            saveState();
-            renderAll();
-            showToast('Classifica aggiornata');
-        }
+document.addEventListener('click', e => {
+  if (e.target === $('modal')) return closeSetup();
+  const b = e.target.closest('[data-a]'); if (b) ACTIONS[b.dataset.a]?.(b);
+});
+$('m-grid').addEventListener('input', e => { const i = e.target.dataset; if (i.id) tmp[i.id][+i.i] = e.target.value; });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSetup(); });
+document.addEventListener('visibilitychange', () => { tick(); if (!document.hidden && tm.running) wake(true); });
 
-        // Calcolo classifica
-        function calculateStandings() {
-            const stats = {};
-            Object.keys(TEAMS).forEach(key => {
-                stats[key] = {
-                    team: TEAMS[key],
-                    played: 0,
-                    won: 0,
-                    lost: 0,
-                    points: 0
-                };
-            });
-
-            schedule.forEach(round => {
-                round.matches.forEach(match => {
-                    if (match.winner) {
-                        const loser = match.winner === match.team1 ? match.team2 : match.team1;
-                        
-                        stats[match.winner].played += 1;
-                        stats[match.winner].won += 1;
-                        stats[match.winner].points += 2; // 2 punti a vittoria
-
-                        stats[loser].played += 1;
-                        stats[loser].lost += 1;
-                    }
-                });
-            });
-
-            // Ordina per Punti desc, poi Vittorie desc, poi Partite Giocate asc, poi ID asc
-            return Object.values(stats).sort((a, b) => {
-                if (b.points !== a.points) return b.points - a.points;
-                if (b.won !== a.won) return b.won - a.won;
-                if (a.played !== b.played) return a.played - b.played;
-                return a.team.id.localeCompare(b.team.id);
-            });
-        }
-
-        // Render Classifica
-        function renderStandings() {
-            const standings = calculateStandings();
-            const tbody = document.getElementById('standings-body');
-            tbody.innerHTML = '';
-
-            standings.forEach((row, index) => {
-                const pos = index + 1;
-                let posBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold text-slate-600 bg-slate-100">${pos}</span>`;
-                if (pos === 1) posBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold text-amber-800 bg-amber-200 ring-2 ring-amber-300/50">1</span>`;
-                else if (pos === 2) posBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold text-slate-700 bg-slate-200">2</span>`;
-                else if (pos === 3) posBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold text-orange-800 bg-orange-200">3</span>`;
-
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-50/90 transition-colors';
-                tr.innerHTML = `
-                    <td class="py-3 pl-4 pr-2 text-center">${posBadge}</td>
-                    <td class="py-3 px-2">
-                        <div class="flex items-center gap-2">
-                            <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold rounded border ${row.team.color}">${row.team.id}</span>
-                            <span class="font-semibold text-slate-800 text-xs sm:text-sm leading-tight">${row.team.name}</span>
-                        </div>
-                    </td>
-                    <td class="py-3 px-2 text-center text-slate-600 font-medium">${row.played}</td>
-                    <td class="py-3 px-2 text-center text-emerald-600 font-semibold">${row.won}</td>
-                    <td class="py-3 px-2 text-center text-rose-500 font-medium">${row.lost}</td>
-                    <td class="py-3 pl-2 pr-4 text-right font-extrabold text-indigo-700 text-base">${row.points}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        // Render Elenco Coppie
-        function renderTeamsList() {
-            const container = document.getElementById('teams-list');
-            container.innerHTML = '';
-
-            Object.values(TEAMS).forEach(team => {
-                const div = document.createElement('div');
-                div.className = 'flex items-center gap-3 p-2.5 rounded-xl border border-slate-100 bg-slate-50/60 hover:bg-slate-100/70 transition';
-                div.innerHTML = `
-                    <span class="w-8 h-8 rounded-lg flex items-center justify-center font-extrabold text-sm border shrink-0 ${team.color}">
-                        ${team.id}
-                    </span>
-                    <div class="min-w-0">
-                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Coppia ${team.id}</p>
-                        <p class="text-sm font-bold text-slate-800 truncate">${team.fullName}</p>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // Render Filtri Giornate
-        function renderFilters() {
-            const container = document.getElementById('round-filters');
-            container.innerHTML = '';
-
-            const allBtn = document.createElement('button');
-            allBtn.className = `px-3 py-1.5 rounded-lg text-xs font-semibold transition ${selectedRoundFilter === 'ALL' ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`;
-            allBtn.textContent = 'Tutte';
-            allBtn.onclick = () => { selectedRoundFilter = 'ALL'; renderSchedule(); renderFilters(); };
-            container.appendChild(allBtn);
-
-            schedule.forEach(r => {
-                const isCompleted = r.matches.every(m => m.winner !== null);
-                const btn = document.createElement('button');
-                btn.className = `px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1 ${selectedRoundFilter === r.round ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`;
-                btn.innerHTML = `G${r.round} ${isCompleted ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>' : ''}`;
-                btn.onclick = () => { selectedRoundFilter = r.round; renderSchedule(); renderFilters(); };
-                container.appendChild(btn);
-            });
-        }
-
-        // Render Calendario Giornate
-        function renderSchedule() {
-            const container = document.getElementById('schedule-container');
-            container.innerHTML = '';
-
-            const filteredRounds = selectedRoundFilter === 'ALL' 
-                ? schedule 
-                : schedule.filter(r => r.round === selectedRoundFilter);
-
-            filteredRounds.forEach(round => {
-                const completedCount = round.matches.filter(m => m.winner !== null).length;
-                const isAllDone = completedCount === round.matches.length;
-
-                const card = document.createElement('div');
-                card.className = `bg-white rounded-2xl shadow-sm border transition-all overflow-hidden ${isAllDone ? 'border-emerald-200/90' : 'border-slate-200/80'}`;
-
-                // Header giornata
-                let badgeHtml = isAllDone
-                    ? `<span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Giocata</span>`
-                    : `<span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-100 text-amber-800"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>In programma</span>`;
-
-                const restingTeamsHtml = (round.rest || []).map(rId => {
-                    const rt = TEAMS[rId];
-                    return `<span class="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded border ${rt.color}"><strong>${rt.id}</strong> ${rt.name}</span>`;
-                }).join(' ');
-
-                let matchesHtml = round.matches.map(match => {
-                    const t1 = TEAMS[match.team1];
-                    const t2 = TEAMS[match.team2];
-                    const t1Won = match.winner === t1.id;
-                    const t2Won = match.winner === t2.id;
-
-                    return `
-                        <div class="p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50/70 transition">
-                            <div class="flex items-center gap-2 shrink-0">
-                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">
-                                    Campo ${match.court}
-                                </span>
-                            </div>
-
-                            <div class="flex-1 grid grid-cols-11 items-center gap-2">
-                                <!-- Team 1 Button -->
-                                <button onclick="toggleWinner(${round.round}, '${match.id}', '${t1.id}')" 
-                                    class="col-span-5 text-left p-2.5 rounded-xl border transition-all flex items-center justify-between gap-2 group cursor-pointer
-                                    ${t1Won 
-                                        ? 'bg-emerald-50 border-emerald-400 ring-1 ring-emerald-400 shadow-sm' 
-                                        : 'bg-white border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/30'}">
-                                    <div class="min-w-0">
-                                        <div class="flex items-center gap-1.5">
-                                            <span class="text-[11px] font-bold px-1.5 py-0.2 rounded border ${t1.color}">${t1.id}</span>
-                                            <span class="text-xs sm:text-sm font-bold truncate ${t1Won ? 'text-emerald-950' : 'text-slate-800'}">${t1.name}</span>
-                                        </div>
-                                    </div>
-                                    ${t1Won ? '<span class="text-emerald-600 font-extrabold text-xs shrink-0 bg-emerald-200/70 px-1.5 py-0.5 rounded">VINCE</span>' : ''}
-                                </button>
-
-                                <!-- VS -->
-                                <div class="col-span-1 text-center text-xs font-extrabold text-slate-400">VS</div>
-
-                                <!-- Team 2 Button -->
-                                <button onclick="toggleWinner(${round.round}, '${match.id}', '${t2.id}')" 
-                                    class="col-span-5 text-left p-2.5 rounded-xl border transition-all flex items-center justify-between gap-2 group cursor-pointer
-                                    ${t2Won 
-                                        ? 'bg-emerald-50 border-emerald-400 ring-1 ring-emerald-400 shadow-sm' 
-                                        : 'bg-white border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/30'}">
-                                    <div class="min-w-0">
-                                        <div class="flex items-center gap-1.5">
-                                            <span class="text-[11px] font-bold px-1.5 py-0.2 rounded border ${t2.color}">${t2.id}</span>
-                                            <span class="text-xs sm:text-sm font-bold truncate ${t2Won ? 'text-emerald-950' : 'text-slate-800'}">${t2.name}</span>
-                                        </div>
-                                    </div>
-                                    ${t2Won ? '<span class="text-emerald-600 font-extrabold text-xs shrink-0 bg-emerald-200/70 px-1.5 py-0.5 rounded">VINCE</span>' : ''}
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-
-                card.innerHTML = `
-                    <div class="px-5 py-3.5 bg-slate-50/80 border-b border-slate-100 flex flex-wrap justify-between items-center gap-2">
-                        <div class="flex items-center gap-2.5">
-                            <h3 class="font-extrabold text-slate-800 text-base sm:text-lg">Turno ${round.round}</h3>
-                            ${badgeHtml}
-                        </div>
-                        <div class="flex items-center gap-1.5 text-xs bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-2xs text-slate-600 font-semibold">
-                            <svg class="w-3.5 h-3.5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span>${round.time} (8 min gioco)</span>
-                        </div>
-                    </div>
-                    <div class="divide-y divide-slate-100">
-                        ${matchesHtml}
-                    </div>
-                    ${restingTeamsHtml ? `
-                    <div class="px-5 py-2.5 bg-slate-50/90 border-t border-slate-100 flex flex-wrap items-center gap-2 text-xs text-slate-500">
-                        <span class="font-semibold">Riposano:</span>
-                        ${restingTeamsHtml}
-                    </div>` : ''}
-                `;
-
-                container.appendChild(card);
-            });
-        }
-
-        // Gestione Tab su Mobile
-        function switchTab(tab) {
-            const secStandings = document.getElementById('section-standings');
-            const secSchedule = document.getElementById('section-schedule');
-            const btnStandings = document.getElementById('tab-standings');
-            const btnSchedule = document.getElementById('tab-schedule');
-
-            if (tab === 'standings') {
-                secStandings.classList.remove('hidden');
-                secSchedule.classList.add('hidden');
-                btnStandings.className = 'flex-1 py-2 text-sm font-semibold rounded-lg bg-white text-indigo-700 shadow-sm transition';
-                btnSchedule.className = 'flex-1 py-2 text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition';
-            } else {
-                secStandings.classList.add('hidden');
-                secSchedule.classList.remove('hidden');
-                btnSchedule.className = 'flex-1 py-2 text-sm font-semibold rounded-lg bg-white text-indigo-700 shadow-sm transition';
-                btnStandings.className = 'flex-1 py-2 text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition';
-            }
-        }
-
-        // Notifica Toast
-        let toastTimeout;
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-msg').textContent = msg;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 2200);
-        }
-
-        function renderAll() {
-            renderStandings();
-            renderTeamsList();
-            renderFilters();
-            renderSchedule();
-        }
-
-        // Avvio
-        window.addEventListener('DOMContentLoaded', () => {
-            loadState();
-            updateTimerUI();
-            renderAll();
-        });
-    </script>
+load(); showTab('standings'); paintTimer(); renderAll();
+setInterval(tick, 250);
+</script>
 </body>
 </html>
