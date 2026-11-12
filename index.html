@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabellone e Classifica Torneo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Custom scrollbar for horizontal tables on mobile */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-800 text-white shadow-lg sticky top-0 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <div class="bg-white/15 p-2 rounded-xl backdrop-blur-sm">
+                    <svg class="w-7 h-7 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">Torneo a Coppie</h1>
+                    <p class="text-xs sm:text-sm text-blue-100">16 Giocatori • 8 Coppie • 4 Campi • 8 Turni (~75 min)</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="openSetupModal()" class="text-xs sm:text-sm bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-3.5 py-2 rounded-lg transition shadow-sm flex items-center gap-1.5 cursor-pointer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Coppie &amp; Sorteggio
+                </button>
+                <button onclick="resetToDefault()" class="text-xs sm:text-sm bg-white/10 hover:bg-white/20 text-white font-medium px-3 py-2 rounded-lg transition border border-white/20 flex items-center gap-1.5 cursor-pointer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    Azzera
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
+
+        <!-- Live Match Timer Bar -->
+        <div class="bg-slate-900 text-white rounded-2xl p-4 sm:p-5 mb-6 shadow-md border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <div id="timer-indicator" class="w-3.5 h-3.5 rounded-full bg-emerald-400 shrink-0"></div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span id="timer-phase-badge" class="text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-500/30 text-indigo-200 border border-indigo-400/30">
+                            Partita (8 min)
+                        </span>
+                        <span id="timer-round-label" class="text-xs text-slate-400 font-medium">4 Campi Attivi</span>
+                    </div>
+                    <div id="timer-display" class="text-3xl sm:text-4xl font-black tracking-tight font-mono mt-0.5 text-white">
+                        08:00
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center gap-2">
+                <button id="btn-timer-toggle" onclick="toggleTimer()" class="px-4 py-2.5 rounded-xl font-bold text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+                    <span>Avvia Timer</span>
+                </button>
+                <button onclick="setTimerMode('match')" class="px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition cursor-pointer">
+                    8:00 Partita
+                </button>
+                <button onclick="setTimerMode('break')" class="px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 transition cursor-pointer">
+                    1:00 Cambio
+                </button>
+                <button onclick="resetTimer()" class="px-3 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-slate-400 border border-slate-700 transition cursor-pointer" title="Reset Timer">
+                    ↺
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Tab Switcher -->
+        <div class="flex lg:hidden bg-slate-200/80 p-1 rounded-xl mb-6">
+            <button id="tab-standings" onclick="switchTab('standings')" class="flex-1 py-2 text-sm font-semibold rounded-lg bg-white text-indigo-700 shadow-sm transition">
+                Classifica
+            </button>
+            <button id="tab-schedule" onclick="switchTab('schedule')" class="flex-1 py-2 text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition">
+                Calendario Giornate
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left Column: Standings & Teams (5 cols on lg) -->
+            <div id="section-standings" class="lg:col-span-5 space-y-6">
+                
+                <!-- Standings Card -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+                    <div class="px-5 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                            <h2 class="font-bold text-slate-800 text-lg">Classifica Generale</h2>
+                        </div>
+                        <span class="text-xs font-medium text-slate-500 bg-slate-200/70 px-2.5 py-1 rounded-full">Vittoria = 2 pt</span>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200 bg-slate-50/80">
+                                    <th class="py-3 pl-4 pr-2 w-10 text-center">#</th>
+                                    <th class="py-3 px-2">Coppia</th>
+                                    <th class="py-3 px-2 text-center" title="Partite Giocate">G</th>
+                                    <th class="py-3 px-2 text-center" title="Vittorie">V</th>
+                                    <th class="py-3 px-2 text-center" title="Sconfitte">P</th>
+                                    <th class="py-3 pl-2 pr-4 text-right font-bold text-slate-700">PT</th>
+                                </tr>
+                            </thead>
+                            <tbody id="standings-body" class="divide-y divide-slate-100 text-sm">
+                                <!-- Populated via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="px-5 py-3 bg-slate-50 text-xs text-slate-500 border-t border-slate-100 flex justify-between items-center">
+                        <span>Clicca sulle squadre nel calendario per aggiornare i vincitori.</span>
+                    </div>
+                </div>
+
+                <!-- Teams Roster Card -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+                    <div class="px-5 py-3.5 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                        <h3 class="font-bold text-slate-800 text-base">Elenco Coppie (16 Giocatori)</h3>
+                        <button onclick="openSetupModal()" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 cursor-pointer">Modifica / Mischia</button>
+                    </div>
+                    <div id="teams-list" class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Schedule & Rounds (7 cols on lg) -->
+            <div id="section-schedule" class="lg:col-span-7 space-y-5 hidden lg:block">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-4 flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                        <h2 class="font-bold text-slate-800 text-base sm:text-lg">Calendario Partite (4 Campi)</h2>
+                        <p class="text-xs text-slate-500">Seleziona un turno o tocca la coppia vincente</p>
+                    </div>
+                    <div id="round-filters" class="flex flex-wrap gap-1.5">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <div id="schedule-container" class="space-y-4">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Setup & Shuffle Modal -->
+    <div id="setup-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-slate-200">
+            <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-extrabold text-slate-800">Gestione Giocatori &amp; Sorteggio Coppie</h3>
+                    <p class="text-xs text-slate-500">Modifica i 16 nomi oppure mischia casualmente le 8 coppie</p>
+                </div>
+                <button onclick="closeSetupModal()" class="w-8 h-8 rounded-lg bg-slate-200/70 hover:bg-slate-300 text-slate-600 font-bold flex items-center justify-center cursor-pointer">✕</button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-5">
+                <div class="flex flex-wrap gap-2 justify-between items-center bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-100">
+                    <span class="text-xs sm:text-sm font-semibold text-indigo-900">Sorteggio automatico dei 16 giocatori:</span>
+                    <button onclick="shufflePlayersInModal()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        Mischia tutte le coppie
+                    </button>
+                </div>
+
+                <div id="modal-pairs-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex justify-end gap-2">
+                <button onclick="closeSetupModal()" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-200/70 transition cursor-pointer">
+                    Annulla
+                </button>
+                <button onclick="savePairsFromModal()" class="px-5 py-2 rounded-xl text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition cursor-pointer">
+                    Salva Coppie
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white text-sm font-medium px-4 py-2.5 rounded-xl shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-msg">Classifica aggiornata</span>
+    </div>
+
+    <script>
+        // Configurazione base dei colori e ID delle 8 coppie
+        const TEAM_STYLES = {
+            A: 'bg-blue-100 text-blue-800 border-blue-200',
+            B: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+            C: 'bg-amber-100 text-amber-800 border-amber-200',
+            D: 'bg-purple-100 text-purple-800 border-purple-200',
+            E: 'bg-rose-100 text-rose-800 border-rose-200',
+            F: 'bg-cyan-100 text-cyan-800 border-cyan-200',
+            G: 'bg-indigo-100 text-indigo-800 border-indigo-200',
+            H: 'bg-teal-100 text-teal-800 border-teal-200'
+        };
+
+        const DEFAULT_PAIRS = {
+            A: ['Crippa', 'Corna'],
+            B: ['Anselmi', 'Milesi'],
+            C: ['Centanaro', 'Bonaldi'],
+            D: ['Ravasio', 'Meryem'],
+            E: ['Barcella', 'Valsecchi'],
+            F: ['Carminati', 'Giuliani'],
+            G: ['Locatelli', 'Ghislandi'],
+            H: ['Plebani', 'Masoni']
+        };
+
+        let pairsConfig = JSON.parse(JSON.stringify(DEFAULT_PAIRS));
+        let TEAMS = {};
+
+        function rebuildTeamsFromPairs() {
+            TEAMS = {};
+            Object.keys(TEAM_STYLES).forEach(id => {
+                const p1 = (pairsConfig[id]?.[0] || `Giocatore ${id}1`).trim();
+                const p2 = (pairsConfig[id]?.[1] || `Giocatore ${id}2`).trim();
+                TEAMS[id] = {
+                    id,
+                    p1,
+                    p2,
+                    name: `${p1} / ${p2}`,
+                    fullName: `${p1} e ${p2}`,
+                    color: TEAM_STYLES[id]
+                };
+            });
+        }
+        rebuildTeamsFromPairs();
+
+        // Calendario 8 Turni su 4 Campi (75 minuti totali: 8 turni da 8 min + 1 min cambio campo = 72 min)
+        // Turni 1-7: Girone all'italiana perfetto (ogni coppia sfida tutte le altre 7 esattamente 1 volta)
+        // Turno 8: Turno finale / rivincita
+        const INITIAL_SCHEDULE = [
+            {
+                round: 1,
+                time: 'Min 00 - 09',
+                matches: [
+                    { id: 'r1m1', court: 1, team1: 'A', team2: 'H', winner: null },
+                    { id: 'r1m2', court: 2, team1: 'B', team2: 'G', winner: null },
+                    { id: 'r1m3', court: 3, team1: 'C', team2: 'F', winner: null },
+                    { id: 'r1m4', court: 4, team1: 'D', team2: 'E', winner: null }
+                ]
+            },
+            {
+                round: 2,
+                time: 'Min 09 - 18',
+                matches: [
+                    { id: 'r2m1', court: 1, team1: 'A', team2: 'G', winner: null },
+                    { id: 'r2m2', court: 2, team1: 'H', team2: 'F', winner: null },
+                    { id: 'r2m3', court: 3, team1: 'B', team2: 'E', winner: null },
+                    { id: 'r2m4', court: 4, team1: 'C', team2: 'D', winner: null }
+                ]
+            },
+            {
+                round: 3,
+                time: 'Min 18 - 27',
+                matches: [
+                    { id: 'r3m1', court: 1, team1: 'A', team2: 'F', winner: null },
+                    { id: 'r3m2', court: 2, team1: 'G', team2: 'E', winner: null },
+                    { id: 'r3m3', court: 3, team1: 'H', team2: 'D', winner: null },
+                    { id: 'r3m4', court: 4, team1: 'B', team2: 'C', winner: null }
+                ]
+            },
+            {
+                round: 4,
+                time: 'Min 27 - 36',
+                matches: [
+                    { id: 'r4m1', court: 1, team1: 'A', team2: 'E', winner: null },
+                    { id: 'r4m2', court: 2, team1: 'F', team2: 'D', winner: null },
+                    { id: 'r4m3', court: 3, team1: 'G', team2: 'C', winner: null },
+                    { id: 'r4m4', court: 4, team1: 'H', team2: 'B', winner: null }
+                ]
+            },
+            {
+                round: 5,
+                time: 'Min 36 - 45',
+                matches: [
+                    { id: 'r5m1', court: 1, team1: 'A', team2: 'D', winner: null },
+                    { id: 'r5m2', court: 2, team1: 'E', team2: 'C', winner: null },
+                    { id: 'r5m3', court: 3, team1: 'F', team2: 'B', winner: null },
+                    { id: 'r5m4', court: 4, team1: 'G', team2: 'H', winner: null }
+                ]
+            },
+            {
+                round: 6,
+                time: 'Min 45 - 54',
+                matches: [
+                    { id: 'r6m1', court: 1, team1: 'A', team2: 'C', winner: null },
+                    { id: 'r6m2', court: 2, team1: 'D', team2: 'B', winner: null },
+                    { id: 'r6m3', court: 3, team1: 'E', team2: 'H', winner: null },
+                    { id: 'r6m4', court: 4, team1: 'F', team2: 'G', winner: null }
+                ]
+            },
+            {
+                round: 7,
+                time: 'Min 54 - 63',
+                matches: [
+                    { id: 'r7m1', court: 1, team1: 'A', team2: 'B', winner: null },
+                    { id: 'r7m2', court: 2, team1: 'C', team2: 'H', winner: null },
+                    { id: 'r7m3', court: 3, team1: 'D', team2: 'G', winner: null },
+                    { id: 'r7m4', court: 4, team1: 'E', team2: 'F', winner: null }
+                ]
+            },
+            {
+                round: 8,
+                time: 'Min 63 - 72',
+                matches: [
+                    { id: 'r8m1', court: 1, team1: 'A', team2: 'H', winner: null },
+                    { id: 'r8m2', court: 2, team1: 'B', team2: 'G', winner: null },
+                    { id: 'r8m3', court: 3, team1: 'C', team2: 'F', winner: null },
+                    { id: 'r8m4', court: 4, team1: 'D', team2: 'E', winner: null }
+                ]
+            }
+        ];
+
+        // Stato dell'applicazione
+        let schedule = JSON.parse(JSON.stringify(INITIAL_SCHEDULE));
+        let selectedRoundFilter = 'ALL';
+
+        // Caricamento stato
+        function loadState() {
+            try {
+                const savedSchedule = localStorage.getItem('torneo_coppie_4campi_v1');
+                if (savedSchedule) {
+                    schedule = JSON.parse(savedSchedule);
+                }
+                const savedPairs = localStorage.getItem('torneo_coppie_nomi_v1');
+                if (savedPairs) {
+                    pairsConfig = JSON.parse(savedPairs);
+                    rebuildTeamsFromPairs();
+                }
+            } catch (e) {
+                console.warn('Impossibile leggere stato:', e);
+            }
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem('torneo_coppie_4campi_v1', JSON.stringify(schedule));
+                localStorage.setItem('torneo_coppie_nomi_v1', JSON.stringify(pairsConfig));
+            } catch (e) {
+                console.warn('Impossibile salvare stato:', e);
+            }
+        }
+
+        // --- GESTIONE MODALE COPPIE & SORTEGGIO ---
+        let tempPairs = {};
+
+        function openSetupModal() {
+            tempPairs = JSON.parse(JSON.stringify(pairsConfig));
+            renderModalPairs();
+            document.getElementById('setup-modal').classList.remove('hidden');
+        }
+
+        function closeSetupModal() {
+            document.getElementById('setup-modal').classList.add('hidden');
+        }
+
+        function renderModalPairs() {
+            const grid = document.getElementById('modal-pairs-grid');
+            grid.innerHTML = '';
+            Object.keys(TEAM_STYLES).forEach(id => {
+                const div = document.createElement('div');
+                div.className = 'p-3 rounded-xl border border-slate-200 bg-slate-50/70 space-y-2';
+                div.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 text-xs font-extrabold rounded border ${TEAM_STYLES[id]}">Coppia ${id}</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" value="${tempPairs[id][0]}" oninput="tempPairs['${id}'][0] = this.value"
+                            class="w-full px-2.5 py-1.5 text-sm font-medium bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-indigo-500" placeholder="Giocatore 1">
+                        <input type="text" value="${tempPairs[id][1]}" oninput="tempPairs['${id}'][1] = this.value"
+                            class="w-full px-2.5 py-1.5 text-sm font-medium bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-indigo-500" placeholder="Giocatore 2">
+                    </div>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        function shufflePlayersInModal() {
+            const allPlayers = [];
+            Object.keys(TEAM_STYLES).forEach(id => {
+                allPlayers.push(tempPairs[id][0].trim() || `Giocatore ${id}1`);
+                allPlayers.push(tempPairs[id][1].trim() || `Giocatore ${id}2`);
+            });
+            // Fisher-Yates shuffle
+            for (let i = allPlayers.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [allPlayers[i], allPlayers[j]] = [allPlayers[j], allPlayers[i]];
+            }
+            const ids = Object.keys(TEAM_STYLES);
+            ids.forEach((id, idx) => {
+                tempPairs[id] = [allPlayers[idx * 2], allPlayers[idx * 2 + 1]];
+            });
+            renderModalPairs();
+            showToast('Coppie rimescolate! Premi "Salva Coppie" per applicare');
+        }
+
+        function savePairsFromModal() {
+            pairsConfig = JSON.parse(JSON.stringify(tempPairs));
+            rebuildTeamsFromPairs();
+            saveState();
+            renderAll();
+            closeSetupModal();
+            showToast('Nuove coppie salvate nel tabellone');
+        }
+
+        // --- GESTIONE TIMER PARTITE ---
+        let timerMode = 'match'; // 'match' (480s) o 'break' (60s)
+        let timerSecondsLeft = 480;
+        let timerRunning = false;
+        let timerInterval = null;
+
+        function playBeep() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(880, ctx.currentTime);
+                gain.gain.setValueAtTime(0.25, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.7);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.7);
+            } catch (e) {}
+        }
+
+        function updateTimerUI() {
+            const mins = String(Math.floor(timerSecondsLeft / 60)).padStart(2, '0');
+            const secs = String(timerSecondsLeft % 60).padStart(2, '0');
+            const display = document.getElementById('timer-display');
+            const badge = document.getElementById('timer-phase-badge');
+            const toggleBtn = document.getElementById('btn-timer-toggle');
+            const indicator = document.getElementById('timer-indicator');
+
+            display.textContent = `${mins}:${secs}`;
+            if (timerSecondsLeft <= 30 && timerSecondsLeft > 0) {
+                display.classList.add('text-amber-400');
+                display.classList.remove('text-white', 'text-rose-400');
+            } else if (timerSecondsLeft === 0) {
+                display.classList.add('text-rose-400');
+                display.classList.remove('text-white', 'text-amber-400');
+            } else {
+                display.classList.add('text-white');
+                display.classList.remove('text-amber-400', 'text-rose-400');
+            }
+
+            if (timerMode === 'match') {
+                badge.textContent = 'Partita (8 min)';
+                badge.className = 'text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-500/30 text-indigo-200 border border-indigo-400/30';
+            } else {
+                badge.textContent = 'Cambio Campo (1 min)';
+                badge.className = 'text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/30 text-amber-200 border border-amber-400/30';
+            }
+
+            if (timerRunning) {
+                toggleBtn.innerHTML = `<span>⏸ Pausa</span>`;
+                toggleBtn.className = 'px-4 py-2.5 rounded-xl font-bold text-sm bg-amber-400 hover:bg-amber-300 text-slate-950 transition flex items-center gap-1.5 shadow-sm cursor-pointer';
+                indicator.className = 'w-3.5 h-3.5 rounded-full bg-emerald-400 animate-ping shrink-0';
+            } else {
+                toggleBtn.innerHTML = `<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg><span>Avvia Timer</span>`;
+                toggleBtn.className = 'px-4 py-2.5 rounded-xl font-bold text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition flex items-center gap-1.5 shadow-sm cursor-pointer';
+                indicator.className = 'w-3.5 h-3.5 rounded-full bg-slate-500 shrink-0';
+            }
+        }
+
+        function toggleTimer() {
+            if (timerRunning) {
+                clearInterval(timerInterval);
+                timerRunning = false;
+            } else {
+                if (timerSecondsLeft === 0) {
+                    timerSecondsLeft = timerMode === 'match' ? 480 : 60;
+                }
+                timerRunning = true;
+                timerInterval = setInterval(() => {
+                    if (timerSecondsLeft > 0) {
+                        timerSecondsLeft--;
+                        updateTimerUI();
+                        if (timerSecondsLeft === 0) {
+                            playBeep();
+                            showToast(timerMode === 'match' ? 'Tempo partita scaduto! Cambio campo' : 'Fine cambio campo! Inizia il turno');
+                        }
+                    } else {
+                        clearInterval(timerInterval);
+                        timerRunning = false;
+                        updateTimerUI();
+                    }
+                }, 1000);
+            }
+            updateTimerUI();
+        }
+
+        function setTimerMode(mode) {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            timerMode = mode;
+            timerSecondsLeft = mode === 'match' ? 480 : 60;
+            updateTimerUI();
+        }
+
+        function resetTimer() {
+            setTimerMode(timerMode);
+        }
+
+        // Ripristina stato iniziale
+        function resetToDefault() {
+            schedule = JSON.parse(JSON.stringify(INITIAL_SCHEDULE));
+            saveState();
+            renderAll();
+            showToast('Tabellone e punteggi azzerati');
+        }
+
+        // Imposta o rimuove il vincitore di una partita
+        function toggleWinner(roundNum, matchId, teamId) {
+            const roundObj = schedule.find(r => r.round === roundNum);
+            if (!roundObj) return;
+            const matchObj = roundObj.matches.find(m => m.id === matchId);
+            if (!matchObj) return;
+
+            if (matchObj.winner === teamId) {
+                matchObj.winner = null; // Deseleziona se già selezionato
+            } else {
+                matchObj.winner = teamId;
+            }
+
+            saveState();
+            renderAll();
+            showToast('Classifica aggiornata');
+        }
+
+        // Calcolo classifica
+        function calculateStandings() {
+            const stats = {};
+            Object.keys(TEAMS).forEach(key => {
+                stats[key] = {
+                    team: TEAMS[key],
+                    played: 0,
+                    won: 0,
+                    lost: 0,
+                    points: 0
+                };
+            });
+
+            schedule.forEach(round => {
+                round.matches.forEach(match => {
+                    if (match.winner) {
+                        const loser = match.winner === match.team1 ? match.team2 : match.team1;
+                        
+                        stats[match.winner].played += 1;
+                        stats[match.winner].won += 1;
+                        stats[match.winner].points += 2; // 2 punti a vittoria
+
+                        stats[loser].played += 1;
+                        stats[loser].lost += 1;
+                    }
+                });
+            });
+
+            // Ordina per Punti desc, poi Vittorie desc, poi Partite Giocate asc, poi ID asc
+            return Object.values(stats).sort((a, b) => {
+                if (b.points !== a.points) return b.points - a.points;
+                if (b.won !== a.won) return b.won - a.won;
+                if (a.played !== b.played) return a.played - b.played;
+                return a.team.id.localeCompare(b.team.id);
+            });
+        }
+
+        // Render Classifica
+        function renderStandings() {
+            const standings = calculateStandings();
+            const tbody = document.getElementById('standings-body');
+            tbody.innerHTML = '';
+
+            standings.forEach((row, index) => {
+                const pos = index + 1;
+                let posBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold text-slate-600 bg-slate-100">${pos}</span>`;
+                if (pos === 1) posBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold text-amber-800 bg-amber-200 ring-2 ring-amber-300/50">1</span>`;
+                else if (pos === 2) posBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold text-slate-700 bg-slate-200">2</span>`;
+                else if (pos === 3) posBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold text-orange-800 bg-orange-200">3</span>`;
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50/90 transition-colors';
+                tr.innerHTML = `
+                    <td class="py-3 pl-4 pr-2 text-center">${posBadge}</td>
+                    <td class="py-3 px-2">
+                        <div class="flex items-center gap-2">
+                            <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold rounded border ${row.team.color}">${row.team.id}</span>
+                            <span class="font-semibold text-slate-800 text-xs sm:text-sm leading-tight">${row.team.name}</span>
+                        </div>
+                    </td>
+                    <td class="py-3 px-2 text-center text-slate-600 font-medium">${row.played}</td>
+                    <td class="py-3 px-2 text-center text-emerald-600 font-semibold">${row.won}</td>
+                    <td class="py-3 px-2 text-center text-rose-500 font-medium">${row.lost}</td>
+                    <td class="py-3 pl-2 pr-4 text-right font-extrabold text-indigo-700 text-base">${row.points}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Render Elenco Coppie
+        function renderTeamsList() {
+            const container = document.getElementById('teams-list');
+            container.innerHTML = '';
+
+            Object.values(TEAMS).forEach(team => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center gap-3 p-2.5 rounded-xl border border-slate-100 bg-slate-50/60 hover:bg-slate-100/70 transition';
+                div.innerHTML = `
+                    <span class="w-8 h-8 rounded-lg flex items-center justify-center font-extrabold text-sm border shrink-0 ${team.color}">
+                        ${team.id}
+                    </span>
+                    <div class="min-w-0">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Coppia ${team.id}</p>
+                        <p class="text-sm font-bold text-slate-800 truncate">${team.fullName}</p>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Render Filtri Giornate
+        function renderFilters() {
+            const container = document.getElementById('round-filters');
+            container.innerHTML = '';
+
+            const allBtn = document.createElement('button');
+            allBtn.className = `px-3 py-1.5 rounded-lg text-xs font-semibold transition ${selectedRoundFilter === 'ALL' ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`;
+            allBtn.textContent = 'Tutte';
+            allBtn.onclick = () => { selectedRoundFilter = 'ALL'; renderSchedule(); renderFilters(); };
+            container.appendChild(allBtn);
+
+            schedule.forEach(r => {
+                const isCompleted = r.matches.every(m => m.winner !== null);
+                const btn = document.createElement('button');
+                btn.className = `px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1 ${selectedRoundFilter === r.round ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`;
+                btn.innerHTML = `G${r.round} ${isCompleted ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>' : ''}`;
+                btn.onclick = () => { selectedRoundFilter = r.round; renderSchedule(); renderFilters(); };
+                container.appendChild(btn);
+            });
+        }
+
+        // Render Calendario Giornate
+        function renderSchedule() {
+            const container = document.getElementById('schedule-container');
+            container.innerHTML = '';
+
+            const filteredRounds = selectedRoundFilter === 'ALL' 
+                ? schedule 
+                : schedule.filter(r => r.round === selectedRoundFilter);
+
+            filteredRounds.forEach(round => {
+                const completedCount = round.matches.filter(m => m.winner !== null).length;
+                const isAllDone = completedCount === round.matches.length;
+
+                const card = document.createElement('div');
+                card.className = `bg-white rounded-2xl shadow-sm border transition-all overflow-hidden ${isAllDone ? 'border-emerald-200/90' : 'border-slate-200/80'}`;
+
+                // Header giornata
+                let badgeHtml = isAllDone
+                    ? `<span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Giocata</span>`
+                    : `<span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-100 text-amber-800"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>In programma</span>`;
+
+                const restingTeamsHtml = (round.rest || []).map(rId => {
+                    const rt = TEAMS[rId];
+                    return `<span class="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded border ${rt.color}"><strong>${rt.id}</strong> ${rt.name}</span>`;
+                }).join(' ');
+
+                let matchesHtml = round.matches.map(match => {
+                    const t1 = TEAMS[match.team1];
+                    const t2 = TEAMS[match.team2];
+                    const t1Won = match.winner === t1.id;
+                    const t2Won = match.winner === t2.id;
+
+                    return `
+                        <div class="p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50/70 transition">
+                            <div class="flex items-center gap-2 shrink-0">
+                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">
+                                    Campo ${match.court}
+                                </span>
+                            </div>
+
+                            <div class="flex-1 grid grid-cols-11 items-center gap-2">
+                                <!-- Team 1 Button -->
+                                <button onclick="toggleWinner(${round.round}, '${match.id}', '${t1.id}')" 
+                                    class="col-span-5 text-left p-2.5 rounded-xl border transition-all flex items-center justify-between gap-2 group cursor-pointer
+                                    ${t1Won 
+                                        ? 'bg-emerald-50 border-emerald-400 ring-1 ring-emerald-400 shadow-sm' 
+                                        : 'bg-white border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/30'}">
+                                    <div class="min-w-0">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="text-[11px] font-bold px-1.5 py-0.2 rounded border ${t1.color}">${t1.id}</span>
+                                            <span class="text-xs sm:text-sm font-bold truncate ${t1Won ? 'text-emerald-950' : 'text-slate-800'}">${t1.name}</span>
+                                        </div>
+                                    </div>
+                                    ${t1Won ? '<span class="text-emerald-600 font-extrabold text-xs shrink-0 bg-emerald-200/70 px-1.5 py-0.5 rounded">VINCE</span>' : ''}
+                                </button>
+
+                                <!-- VS -->
+                                <div class="col-span-1 text-center text-xs font-extrabold text-slate-400">VS</div>
+
+                                <!-- Team 2 Button -->
+                                <button onclick="toggleWinner(${round.round}, '${match.id}', '${t2.id}')" 
+                                    class="col-span-5 text-left p-2.5 rounded-xl border transition-all flex items-center justify-between gap-2 group cursor-pointer
+                                    ${t2Won 
+                                        ? 'bg-emerald-50 border-emerald-400 ring-1 ring-emerald-400 shadow-sm' 
+                                        : 'bg-white border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/30'}">
+                                    <div class="min-w-0">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="text-[11px] font-bold px-1.5 py-0.2 rounded border ${t2.color}">${t2.id}</span>
+                                            <span class="text-xs sm:text-sm font-bold truncate ${t2Won ? 'text-emerald-950' : 'text-slate-800'}">${t2.name}</span>
+                                        </div>
+                                    </div>
+                                    ${t2Won ? '<span class="text-emerald-600 font-extrabold text-xs shrink-0 bg-emerald-200/70 px-1.5 py-0.5 rounded">VINCE</span>' : ''}
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                card.innerHTML = `
+                    <div class="px-5 py-3.5 bg-slate-50/80 border-b border-slate-100 flex flex-wrap justify-between items-center gap-2">
+                        <div class="flex items-center gap-2.5">
+                            <h3 class="font-extrabold text-slate-800 text-base sm:text-lg">Turno ${round.round}</h3>
+                            ${badgeHtml}
+                        </div>
+                        <div class="flex items-center gap-1.5 text-xs bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-2xs text-slate-600 font-semibold">
+                            <svg class="w-3.5 h-3.5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>${round.time} (8 min gioco)</span>
+                        </div>
+                    </div>
+                    <div class="divide-y divide-slate-100">
+                        ${matchesHtml}
+                    </div>
+                    ${restingTeamsHtml ? `
+                    <div class="px-5 py-2.5 bg-slate-50/90 border-t border-slate-100 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+                        <span class="font-semibold">Riposano:</span>
+                        ${restingTeamsHtml}
+                    </div>` : ''}
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        // Gestione Tab su Mobile
+        function switchTab(tab) {
+            const secStandings = document.getElementById('section-standings');
+            const secSchedule = document.getElementById('section-schedule');
+            const btnStandings = document.getElementById('tab-standings');
+            const btnSchedule = document.getElementById('tab-schedule');
+
+            if (tab === 'standings') {
+                secStandings.classList.remove('hidden');
+                secSchedule.classList.add('hidden');
+                btnStandings.className = 'flex-1 py-2 text-sm font-semibold rounded-lg bg-white text-indigo-700 shadow-sm transition';
+                btnSchedule.className = 'flex-1 py-2 text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition';
+            } else {
+                secStandings.classList.add('hidden');
+                secSchedule.classList.remove('hidden');
+                btnSchedule.className = 'flex-1 py-2 text-sm font-semibold rounded-lg bg-white text-indigo-700 shadow-sm transition';
+                btnStandings.className = 'flex-1 py-2 text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition';
+            }
+        }
+
+        // Notifica Toast
+        let toastTimeout;
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2200);
+        }
+
+        function renderAll() {
+            renderStandings();
+            renderTeamsList();
+            renderFilters();
+            renderSchedule();
+        }
+
+        // Avvio
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            updateTimerUI();
+            renderAll();
+        });
+    </script>
+</body>
+</html>
